@@ -1,0 +1,41 @@
+{
+  "name": "movies-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc",
+    "dev": "nodemon --watch src -e js,jsx --exec node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxterino/movies-backend.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxterino/movies-backend/issues"
+  },
+  "homepage": "https://github.com/foxterino/movies-backend#readme",
+  "dependencies": {
+    "knex": "^0.21.5",
+    "koa": "^2.13.0",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^9.4.0",
+    "objection": "^2.2.3",
+    "pg": "^8.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.0",
+    "nodemon": "^2.0.4"
+  }
+}
