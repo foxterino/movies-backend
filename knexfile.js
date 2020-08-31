@@ -1,7 +1,5 @@
-const environment = process.env.NODE_ENV || 'development';
-
 const path = require('path');
-const config = require('./config/config')[environment];
+const config = require('./config')(process.env.NODE_ENV);
 
 module.exports = {
   development: {
