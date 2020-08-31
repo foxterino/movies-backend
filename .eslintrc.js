@@ -8,9 +8,12 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 12,
+    ecmaVersion: '2018',
     sourceType: 'module',
   },
   plugins: ['react', 'prettier'],
-  rules: {},
+  rules: {
+    'import/prefer-default-export': 'off',
+    'class-methods-use-this': 'off',
+  },
 };
