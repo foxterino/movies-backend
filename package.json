@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc",
-    "dev": "nodemon --watch src -e js,jsx --exec node src/app.js"
+    "dev": "nodemon --watch './*.js' --exec babel-node index.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +19,7 @@
   },
   "homepage": "https://github.com/foxterino/movies-backend#readme",
   "dependencies": {
+    "@babel/register": "^7.10.5",
     "knex": "^0.21.5",
     "koa": "^2.13.0",
     "koa-logger": "^3.2.1",
@@ -28,6 +28,9 @@
     "pg": "^8.3.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
     "eslint": "^7.7.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
