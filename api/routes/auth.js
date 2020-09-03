@@ -1,7 +1,7 @@
 import Router from 'koa-router';
 import { AuthService } from '../../service/AuthService';
 
-const TOKEN_KEY = 'token';
+export const TOKEN_KEY = 'token';
 
 const route = new Router({ prefix: '/auth' });
 
