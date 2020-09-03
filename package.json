@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc",
-    "dev": "nodemon --watch './*.js' --exec babel-node index.js"
+    "dev": "nodemon --watch '*.js' --exec babel-node index.js",
+    "migrate": "npx knex migrate:latest",
+    "seed": "npx knex seed:run"
   },
   "repository": {
     "type": "git",
@@ -20,10 +22,15 @@
   "homepage": "https://github.com/foxterino/movies-backend#readme",
   "dependencies": {
     "@babel/register": "^7.10.5",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.5",
     "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-json": "^2.0.2",
+    "koa-jwt": "^4.0.0",
     "koa-logger": "^3.2.1",
     "koa-router": "^9.4.0",
+    "md5": "^2.3.0",
     "objection": "^2.2.3",
     "pg": "^8.3.3"
   },
