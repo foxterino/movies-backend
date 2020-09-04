@@ -16,7 +16,10 @@ export class UserModel extends Model {
   }
 
   static findUser({ username, password }) {
-    return this.query().findOne({ username, password }).throwIfNotFound();
+    return this.query()
+      .findOne({ username, password })
+      .columns(['id', 'email', 'username'])
+      .throwIfNotFound();
   }
 
   static get jsonSchema() {
