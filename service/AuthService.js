@@ -9,8 +9,8 @@ const userMapper = userData => {
   return rest;
 };
 
-const generateToken = ({ id, username }) => {
-  const data = { id, username };
+const generateToken = ({ id }) => {
+  const data = { id };
   const { jwtSecret } = config(process.env.NODE_ENV);
 
   return jwt.sign(data, jwtSecret);
