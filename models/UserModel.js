@@ -1,5 +1,7 @@
 import { Model } from 'objection';
 
+export const PASSWORD_MIN_LENGTH = 1;
+
 export class UserModel extends Model {
   static get tableName() {
     return 'users';
@@ -25,7 +27,7 @@ export class UserModel extends Model {
         id: { type: 'integer' },
         email: { type: 'string', minLength: 1 },
         username: { type: 'string', minLength: 1 },
-        password: { type: 'string', minLength: 1 },
+        password: { type: 'string', minLength: PASSWORD_MIN_LENGTH },
         created_at: { type: 'string' },
         updated_at: { type: 'string' },
       },
