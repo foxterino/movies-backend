@@ -3,6 +3,12 @@ import jwt from 'jsonwebtoken';
 import { UserModel, PASSWORD_MIN_LENGTH } from '../models/UserModel';
 import config from '../config';
 
+const userMapper = userRecord => {
+  const { password, ...user } = userRecord;
+
+  return user;
+};
+
 const generateToken = ({ id }) => {
   const data = { id };
   const { jwtSecret } = config(process.env.NODE_ENV);
@@ -21,9 +27,10 @@ export class AuthService {
       password: hashedPassword,
     });
 
+    const user = userMapper(userRecord);
     const token = generateToken(userRecord);
 
-    return { user: userRecord, token };
+    return { user, token };
   }
 
   static async signIn(userData) {
