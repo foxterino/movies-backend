@@ -14,8 +14,7 @@ export const auth = app => {
       ctx.body = { user, token };
       ctx.cookies.set(TOKEN_KEY, token);
     } catch (error) {
-      ctx.status = 401;
-      ctx.body = { message: 'Registration failed' };
+      ctx.throw(401, 'Registration failed');
     }
   });
 
@@ -27,18 +26,13 @@ export const auth = app => {
       ctx.body = { user, token };
       ctx.cookies.set(TOKEN_KEY, token);
     } catch (error) {
-      ctx.status = 401;
-      ctx.body = { message: 'Authentication failed' };
+      ctx.throw(401, 'Incorrect credentials');
     }
   });
 
-  route.delete('/signout', async (ctx, next) => {
-    try {
-      ctx.status = 200;
-      ctx.cookies.set(TOKEN_KEY, '');
-    } catch (error) {
-      return next(error);
-    }
+  route.delete('/signout', async ctx => {
+    ctx.status = 200;
+    ctx.cookies.set(TOKEN_KEY, '');
   });
 
   app.use(route.routes(), route.allowedMethods());
