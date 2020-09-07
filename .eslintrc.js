@@ -14,7 +14,5 @@ module.exports = {
   plugins: ['react', 'prettier'],
   rules: {
     'import/prefer-default-export': 'off',
-    'class-methods-use-this': 'off',
-    'consistent-return': 'off',
   },
 };
