@@ -1,30 +1,14 @@
 import Koa from 'koa';
-import Router from 'koa-router';
-import Logger from 'koa-logger';
-
-import Knex from 'knex';
-import { Model } from 'objection';
-import knexConfig from './knexfile';
-
-const environment = process.env.NODE_ENV || 'development';
-const knex = Knex(knexConfig[environment]);
-
-Model.knex(knex);
+import { loadApp } from './loaders';
 
 const PORT = 3000;
 
-const app = new Koa();
-const router = new Router();
+const startServer = () => {
+  const app = new Koa();
 
-// Response to the World to the GET requests
-router.get('/', async ctx => {
-  ctx.body = 'Hello, World!\n';
-});
+  loadApp({ app });
 
-// Development logging
-app.use(Logger());
-// Add routes and response to the OPTIONS requests
-app.use(router.routes()).use(router.allowedMethods());
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+};
 
-// Listen the port
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+startServer();

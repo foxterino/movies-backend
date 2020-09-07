@@ -3,5 +3,6 @@ module.exports = {
     database: '',
     user: '',
     password: '',
+    jwtSecret: '',
   },
 };
