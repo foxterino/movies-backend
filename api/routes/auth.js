@@ -8,10 +8,10 @@ const route = new Router({ prefix: '/auth' });
 export const auth = app => {
   route.post('/signup', async ctx => {
     try {
-      const { user, token } = await AuthService.signUp(ctx.request.body);
+      const { token } = await AuthService.signUp(ctx.request.body);
 
       ctx.status = 201;
-      ctx.body = { user, token };
+      ctx.body = { token };
       ctx.cookies.set(TOKEN_KEY, token);
     } catch (error) {
       ctx.throw(401, 'Registration failed');
@@ -20,10 +20,10 @@ export const auth = app => {
 
   route.post('/signin', async ctx => {
     try {
-      const { user, token } = await AuthService.signIn(ctx.request.body);
+      const { token } = await AuthService.signIn(ctx.request.body);
 
       ctx.status = 201;
-      ctx.body = { user, token };
+      ctx.body = { token };
       ctx.cookies.set(TOKEN_KEY, token);
     } catch (error) {
       ctx.throw(401, 'Incorrect credentials');
