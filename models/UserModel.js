@@ -27,12 +27,30 @@ export class UserModel extends Model {
       type: 'object',
       required: ['email', 'username', 'password'],
       properties: {
-        id: { type: 'integer' },
-        email: { type: 'string', minLength: 1 },
-        username: { type: 'string', minLength: 1 },
-        password: { type: 'string', minLength: PASSWORD_MIN_LENGTH },
-        created_at: { type: 'string' },
-        updated_at: { type: 'string' },
+        id: {
+          type: 'integer',
+        },
+        email: {
+          type: 'string',
+          format: 'email',
+          minLength: 1,
+        },
+        username: {
+          type: 'string',
+          minLength: 1,
+        },
+        password: {
+          type: 'string',
+          minLength: PASSWORD_MIN_LENGTH,
+        },
+        created_at: {
+          type: 'string',
+          format: 'date-time',
+        },
+        updated_at: {
+          type: 'string',
+          format: 'date-time',
+        },
       },
     };
   }
