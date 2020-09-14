@@ -1,6 +1,6 @@
-import KoaLogger from 'koa-logger';
-import cors from '@koa/cors';
 import json from 'koa-json';
+import cors from '@koa/cors';
+import KoaLogger from 'koa-logger';
 import bodyParser from 'koa-bodyparser';
 import { createRouter } from '../api';
 import { errorHandler } from '../middlewares/errorHandler';

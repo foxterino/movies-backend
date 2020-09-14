@@ -1,7 +1,7 @@
 import md5 from 'md5';
 import jwt from 'jsonwebtoken';
-import { UserModel, PASSWORD_MIN_LENGTH } from '../models/UserModel';
 import config from '../config';
+import { UserModel, PASSWORD_MIN_LENGTH } from '../models/UserModel';
 
 const generateToken = ({ id }) => {
   const data = { id };
