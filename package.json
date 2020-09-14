@@ -8,6 +8,7 @@
     "compile": "tsc",
     "dev": "nodemon --watch '*.js' --exec babel-node index.js",
     "migrate": "npx knex migrate:latest",
+    "migrate:rollback": "npx knex migrate:rollback",
     "seed": "npx knex seed:run"
   },
   "repository": {
@@ -22,6 +23,7 @@
   "homepage": "https://github.com/foxterino/movies-backend#readme",
   "dependencies": {
     "@babel/register": "^7.10.5",
+    "@koa/cors": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.5",
     "koa": "^2.13.0",
