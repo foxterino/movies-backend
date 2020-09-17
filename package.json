@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc",
     "dev": "nodemon --watch '*.js' --exec babel-node index.js",
+    "boot": "babel-node bin/index.js",
     "migrate": "npx knex migrate:latest",
     "migrate:rollback": "npx knex migrate:rollback",
     "seed": "npx knex seed:run"
