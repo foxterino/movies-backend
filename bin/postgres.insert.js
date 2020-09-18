@@ -1,13 +1,8 @@
-import Knex from 'knex';
-import knexConfig from '../knexfile';
+import '../boot';
 import movies from '../data/movies.json';
 import comments from '../data/comments.json';
-import { Model } from 'objection';
 import { MovieModel } from '../models/MovieModel';
 import { CommentModel } from '../models/CommentModel';
-
-const knex = Knex(knexConfig[process.env.NODE_ENV]);
-Model.knex(knex);
 
 const initDatabase = async () => {
   try {
