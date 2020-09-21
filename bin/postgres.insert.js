@@ -1,24 +1,23 @@
-import '../boot';
 import movies from '../data/movies.json';
 import comments from '../data/comments.json';
+import { app } from '../boot';
+import { Model } from 'objection';
 import { MovieModel } from '../models/MovieModel';
 import { CommentModel } from '../models/CommentModel';
 
 const initDatabase = async () => {
-  try {
-    await movies.reduce(async (moviesAcc, movie, index) => {
-      const { id } = await MovieModel.createMovie(movie);
-      const movieComments = comments[index];
+  Model.knex(app.knex);
 
-      await movieComments.reduce(async (commentsAcc, comment) => {
-        await CommentModel.createComment({ movie_id: id, ...comment });
-      }, Promise.resolve());
+  await movies.reduce(async (moviesAcc, movie, index) => {
+    const { id } = await MovieModel.createMovie(movie);
+    const movieComments = comments[index];
+
+    await movieComments.reduce(async (commentsAcc, comment) => {
+      await CommentModel.createComment({ movie_id: id, ...comment });
     }, Promise.resolve());
+  }, Promise.resolve());
 
-    process.exit(0);
-  } catch (error) {
-    process.exit(1);
-  }
+  app.shutdown();
 };
 
 initDatabase();
