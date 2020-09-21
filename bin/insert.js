@@ -1,10 +1,8 @@
 import path from 'path';
 import minimist from 'minimist';
+import requireAll from 'require-all';
 import { app } from '../boot';
 import { Model as ObjectionModel } from 'objection';
-
-// eslint-disable-next-line global-require, import/no-dynamic-require
-const req = pathToFile => require(path.join(__dirname, pathToFile));
 
 const insert = async () => {
   ObjectionModel.knex(app.knex);
@@ -12,8 +10,10 @@ const insert = async () => {
   try {
     const { modelName, dataName } = minimist(process.argv.slice(2));
 
-    const Model = req(`../models/${modelName}.js`)[modelName];
-    const data = req(`../data/${dataName}.json`);
+    const Models = requireAll({ dirname: path.join(__dirname, '../models') });
+    const Model = Models[modelName][modelName];
+    const dataSets = requireAll({ dirname: path.join(__dirname, '../data') });
+    const data = dataSets[dataName];
 
     await Model.query().insert(data);
   } catch (error) {
