@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Tenet",
+    "year": 2020,
+    "rating": 8.1,
+    "producer": "Malia Crux",
+    "budget": 753605,
+    "poster": "http://dummyimage.com/600x900.jpg/cc0000/ffffff",
+    "actors": ["Robert Pattinson"],
+    "genres": ["Fantasy", "Drama"]
+  },
+  {
+    "title": "Titanic",
+    "year": 1997,
+    "rating": 9.6,
+    "producer": "James Cameron",
+    "budget": 729092,
+    "poster": "http://dummyimage.com/600x900.jpg/cc0000/ffffff",
+    "actors": [
+      "Leonardo DiCaprio",
+      "Naomi Watts",
+      "Armie Hammer",
+      "Josh Lucas"
+    ],
+    "genres": ["Drama"]
+  },
+  {
+    "title": "Return Of The Jedi",
+    "year": 1983,
+    "rating": 8.9,
+    "producer": "Colas Kenafaque",
+    "budget": 732058,
+    "poster": "http://dummyimage.com/600x900.jpg/cc0000/ffffff",
+    "actors": ["Mark Hamill", "Harrison Ford", "Carrie Fisher"],
+    "genres": ["Action"]
+  }
+]
