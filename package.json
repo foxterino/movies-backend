@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc",
-    "dev": "nodemon --watch '*.js' --exec node -r esm app.js",
-    "insert": "node -r esm bin/postgres.insert.js",
+    "node-esm": "node -r esm",
+    "dev": "nodemon --watch '*.js' --exec yarn node-esm app.js",
     "migrate": "npx knex migrate:latest",
     "migrate:rollback": "npx knex migrate:rollback",
     "seed": "npx knex seed:run"
@@ -35,6 +35,7 @@
     "koa-logger": "^3.2.1",
     "koa-router": "^9.4.0",
     "md5": "^2.3.0",
+    "minimist": "^1.2.5",
     "objection": "^2.2.3",
     "pg": "^8.3.3"
   },
