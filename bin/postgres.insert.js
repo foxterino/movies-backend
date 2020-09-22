@@ -14,7 +14,7 @@ const initDatabase = async () => {
       const movieComments = comments[index];
 
       await movieComments.reduce(async (commentsAcc, comment) => {
-        await CommentModel.createComment({ movie_id: id, ...comment });
+        await CommentModel.createComment({ movieId: id, ...comment });
       }, Promise.resolve());
     }, Promise.resolve());
   } catch (error) {
