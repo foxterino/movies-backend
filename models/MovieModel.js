@@ -23,6 +23,10 @@ export class MovieModel extends Model {
       .page(paging.page, paging.pageSize);
   }
 
+  static findMovies(query) {
+    return this.query().where('title', 'ilike', `%${query}%`);
+  }
+
   static get relationMappings() {
     return {
       comments: {
