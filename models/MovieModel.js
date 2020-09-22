@@ -14,17 +14,26 @@ export class MovieModel extends Model {
     return this.query().insert(movieData);
   }
 
-  static getAllMovies({ years, genres, order, paging }) {
+  static async getAllMovies({
+    year,
+    genre,
+    column,
+    direction,
+    page,
+    pageSize,
+  }) {
     return this.query()
       .withGraphFetched('[comments]')
-      .whereIn('year', years)
-      .whereRaw('(genres) && ?', `{${genres}}`)
-      .orderBy(order.column, order.direction)
-      .page(paging.page, paging.pageSize);
+      .where(qb => !year || qb.where({ year }))
+      .where(qb => !genre || qb.whereRaw('? ILIKE ANY(genres)', genre))
+      .orderBy(column, direction)
+      .page(page, pageSize);
   }
 
   static findMovies(query) {
-    return this.query().where('title', 'ilike', `%${query}%`);
+    return this.query().where(qb =>
+      query ? qb.where('title', 'ilike', `%${query}%`) : []
+    );
   }
 
   static findMovieById(id) {

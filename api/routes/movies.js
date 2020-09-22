@@ -1,14 +1,13 @@
 import Router from 'koa-router';
 import { isAuth } from '../../middlewares/isAuth';
 import { MovieModel } from '../../models/MovieModel';
-import { MoviesService } from '../../service/MoviesService';
 
 const route = new Router({ prefix: '/movies' });
 
 export const moviesRouter = app => {
-  route.post('/', async ctx => {
+  route.get('/', async ctx => {
     try {
-      const movies = await MovieModel.getAllMovies(ctx.request.body);
+      const movies = await MovieModel.getAllMovies(ctx.query);
 
       ctx.status = 200;
       ctx.body = movies;
@@ -18,7 +17,7 @@ export const moviesRouter = app => {
   });
 
   route.get('/search', async ctx => {
-    const movies = await MoviesService.findMovies(ctx.query.title);
+    const movies = await MovieModel.findMovies(ctx.query.title);
 
     ctx.status = 200;
     ctx.body = movies;
