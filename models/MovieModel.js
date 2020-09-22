@@ -27,6 +27,10 @@ export class MovieModel extends Model {
     return this.query().where('title', 'ilike', `%${query}%`);
   }
 
+  static findMovieById(id) {
+    return this.query().withGraphFetched('[comments]').findById(id);
+  }
+
   static get relationMappings() {
     return {
       comments: {

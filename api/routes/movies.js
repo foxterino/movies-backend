@@ -24,5 +24,16 @@ export const moviesRouter = app => {
     ctx.body = movies;
   });
 
+  route.get('/:id', async ctx => {
+    try {
+      const movie = await MovieModel.findMovieById(ctx.params.id);
+
+      ctx.status = 200;
+      ctx.body = movie;
+    } catch (error) {
+      ctx.throw(404, 'Movie not found');
+    }
+  });
+
   app.use(isAuth(), route.routes(), route.allowedMethods());
 };
