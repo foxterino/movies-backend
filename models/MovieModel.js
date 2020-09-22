@@ -14,6 +14,15 @@ export class MovieModel extends Model {
     return this.query().insert(movieData);
   }
 
+  static getAllMovies({ years, genres, order, paging }) {
+    return this.query()
+      .withGraphFetched('[comments]')
+      .whereIn('year', years)
+      .whereRaw('(genres) && ?', `{${genres}}`)
+      .orderBy(order.column, order.direction)
+      .page(paging.page, paging.pageSize);
+  }
+
   static get relationMappings() {
     return {
       comments: {
