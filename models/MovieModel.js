@@ -28,7 +28,10 @@ export class MovieModel extends Model {
   }
 
   static findMovieById(id) {
-    return this.query().withGraphFetched('[comments]').findById(id);
+    return this.query()
+      .withGraphFetched('[comments]')
+      .findById(id)
+      .throwIfNotFound();
   }
 
   static get relationMappings() {
