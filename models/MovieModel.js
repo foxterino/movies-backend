@@ -14,11 +14,22 @@ export class MovieModel extends Model {
     return this.query().insert(movieData);
   }
 
-  static getAllMovies({ year, genre, column, direction, page, pageSize }) {
+  static getAllMovies({
+    years = [],
+    genres = [],
+    column,
+    direction,
+    page,
+    pageSize,
+  }) {
     return this.query()
       .withGraphFetched('[comments]')
-      .where(qb => !year || qb.where({ year }))
-      .where(qb => !genre || qb.whereRaw('? ILIKE ANY(genres)', genre))
+      .where(
+        qb => !years.length || qb.whereRaw('(year) = ANY(?)', `{${years}}`)
+      )
+      .where(
+        qb => !genres.length || qb.whereRaw('(genres) && ?', `{${genres}}`)
+      )
       .orderBy(column, direction)
       .page(page, pageSize);
   }
