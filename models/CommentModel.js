@@ -9,6 +9,12 @@ export class CommentModel extends Model {
     this.updated_at = new Date().toISOString();
   }
 
+  static get modifiers() {
+    return {
+      orderByDate: qb => qb.orderBy('created_at'),
+    };
+  }
+
   static createComment({ movieId, text }) {
     return this.query().insert({ movie_id: movieId, text }).returning('*');
   }
