@@ -14,14 +14,7 @@ export class MovieModel extends Model {
     return this.query().insert(movieData);
   }
 
-  static async getAllMovies({
-    year,
-    genre,
-    column,
-    direction,
-    page,
-    pageSize,
-  }) {
+  static getAllMovies({ year, genre, column, direction, page, pageSize }) {
     return this.query()
       .withGraphFetched('[comments]')
       .where(qb => !year || qb.where({ year }))
