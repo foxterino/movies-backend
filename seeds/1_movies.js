@@ -18,7 +18,6 @@ exports.seed = knex =>
             'Clémence Poésy',
             'Lizzy Caplan',
           ],
-          genres: ['Biography', 'Drama'],
         },
         {
           id: 2,
@@ -29,7 +28,6 @@ exports.seed = knex =>
           budget: 729092,
           poster: 'http://dummyimage.com/600x900.jpg/cc0000/ffffff',
           actors: ['Mira Furlan', 'Tony Grga'],
-          genres: ['Drama'],
         },
       ])
     );
