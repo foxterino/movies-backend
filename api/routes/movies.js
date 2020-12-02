@@ -17,7 +17,7 @@ export const moviesRouter = app => {
   });
 
   route.get('/search', async ctx => {
-    const movies = await MovieModel.findMovies(ctx.query.title);
+    const movies = await MovieModel.findByTitle(ctx.query.title);
 
     ctx.status = 200;
     ctx.body = movies;

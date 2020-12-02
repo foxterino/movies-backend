@@ -1,4 +1,5 @@
 import { Model } from 'objection';
+import { GenreModel } from './GenreModel';
 import { CommentModel } from './CommentModel';
 
 export class MovieModel extends Model {
@@ -14,29 +15,18 @@ export class MovieModel extends Model {
     return this.query().insert(movieData);
   }
 
-  static getAllMovies({
-    years = [],
-    genres = [],
-    column,
-    direction,
-    page,
-    pageSize,
-  }) {
+  static getAllMovies({ column, direction, page, pageSize, ...selectors }) {
     return this.query()
-      .withGraphFetched('[comments]')
-      .where(
-        qb => !years.length || qb.whereRaw('(year) = ANY(?)', `{${years}}`)
-      )
-      .where(
-        qb => !genres.length || qb.whereRaw('(genres) && ?', `{${genres}}`)
-      )
+      .skipUndefined()
+      .withGraphJoined('[genres, comments]')
+      .where(selectors)
       .orderBy(column, direction)
       .page(page, pageSize);
   }
 
-  static findMovies(query) {
+  static findByTitle(title) {
     return this.query().where(qb =>
-      query ? qb.where('title', 'ilike', `%${query}%`) : []
+      title ? qb.where('title', 'ilike', `%${title}%`) : []
     );
   }
 
@@ -55,6 +45,14 @@ export class MovieModel extends Model {
         join: {
           from: 'movies.id',
           to: 'comments.movie_id',
+        },
+      },
+      genres: {
+        relation: Model.HasManyRelation,
+        modelClass: GenreModel,
+        join: {
+          from: 'movies.id',
+          to: 'genres.movie_id',
         },
       },
     };
