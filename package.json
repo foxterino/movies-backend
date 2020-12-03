@@ -8,9 +8,11 @@
     "compile": "tsc",
     "node-esm": "node -r esm",
     "dev": "nodemon --watch '*.js' --exec yarn node-esm app.js",
-    "migrate": "npx knex migrate:latest",
-    "migrate:rollback": "npx knex migrate:rollback",
-    "seed": "npx knex seed:run"
+    "migrate:make": "npx knex --knexfile config/config.js migrate:make",
+    "migrate:latest": "npx knex --knexfile config/config.js migrate:latest",
+    "migrate:rollback": "npx knex --knexfile config/config.js migrate:rollback",
+    "seed:make": "npx knex --knexfile config/config.js seed:make",
+    "seed:run": "npx knex --knexfile config/config.js seed:run"
   },
   "repository": {
     "type": "git",

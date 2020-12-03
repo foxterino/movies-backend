@@ -1,10 +1,14 @@
 import Router from 'koa-router';
-import { auth } from './routes/auth';
+import { authRouter } from './routes/auth';
+import { moviesRouter } from './routes/movies';
+import { commentsRouter } from './routes/comments';
 
 export const createRouter = () => {
   const app = new Router({ prefix: '/api' });
 
-  auth(app);
+  authRouter(app);
+  moviesRouter(app);
+  commentsRouter(app);
 
   return app;
 };

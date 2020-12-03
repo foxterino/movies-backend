@@ -1,28 +1,22 @@
 import { Model } from 'objection';
 
-export class CommentModel extends Model {
+export class GenreModel extends Model {
   static get tableName() {
-    return 'comments';
+    return 'genres';
   }
 
   $beforeUpdate() {
     this.updated_at = new Date().toISOString();
   }
 
-  static get modifiers() {
-    return {
-      orderByDate: qb => qb.orderBy('created_at'),
-    };
-  }
-
-  static createComment({ movieId, text }) {
-    return this.query().insert({ movie_id: movieId, text }).returning('*');
+  static createGenre({ movieId, name }) {
+    return this.query().insert({ movie_id: movieId, name }).returning('*');
   }
 
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['movie_id', 'text'],
+      required: ['movie_id', 'name'],
       properties: {
         id: {
           type: 'integer',
@@ -30,7 +24,7 @@ export class CommentModel extends Model {
         movie_id: {
           type: 'integer',
         },
-        text: {
+        name: {
           type: 'string',
           minLength: 1,
         },

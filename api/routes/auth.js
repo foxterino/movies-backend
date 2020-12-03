@@ -5,7 +5,7 @@ export const TOKEN_KEY = 'token';
 
 const route = new Router({ prefix: '/auth' });
 
-export const auth = app => {
+export const authRouter = app => {
   route.post('/signup', async ctx => {
     try {
       const { token } = await AuthService.signUp(ctx.request.body);

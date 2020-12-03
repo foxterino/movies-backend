@@ -1,4 +1,5 @@
 import { Model } from 'objection';
+import { GenreModel } from './GenreModel';
 import { CommentModel } from './CommentModel';
 
 export class MovieModel extends Model {
@@ -14,6 +15,27 @@ export class MovieModel extends Model {
     return this.query().insert(movieData);
   }
 
+  static getAllMovies({ column, direction, ...selectors }) {
+    return this.query()
+      .skipUndefined()
+      .withGraphJoined('[genres, comments]')
+      .where(selectors)
+      .orderBy(column, direction);
+  }
+
+  static findByTitle(title) {
+    return this.query().where(qb =>
+      title ? qb.where('title', 'ilike', `%${title}%`) : []
+    );
+  }
+
+  static findMovieById(id) {
+    return this.query()
+      .withGraphJoined('[genres, comments(orderByDate)]')
+      .findById(id)
+      .throwIfNotFound();
+  }
+
   static get relationMappings() {
     return {
       comments: {
@@ -22,6 +44,14 @@ export class MovieModel extends Model {
         join: {
           from: 'movies.id',
           to: 'comments.movie_id',
+        },
+      },
+      genres: {
+        relation: Model.HasManyRelation,
+        modelClass: GenreModel,
+        join: {
+          from: 'movies.id',
+          to: 'genres.movie_id',
         },
       },
     };
