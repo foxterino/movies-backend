@@ -15,13 +15,12 @@ export class MovieModel extends Model {
     return this.query().insert(movieData);
   }
 
-  static getAllMovies({ column, direction, page, pageSize, ...selectors }) {
+  static getAllMovies({ column, direction, ...selectors }) {
     return this.query()
       .skipUndefined()
       .withGraphJoined('[genres, comments]')
       .where(selectors)
-      .orderBy(column, direction)
-      .page(page, pageSize);
+      .orderBy(column, direction);
   }
 
   static findByTitle(title) {
@@ -32,7 +31,7 @@ export class MovieModel extends Model {
 
   static findMovieById(id) {
     return this.query()
-      .withGraphFetched('[comments(orderByDate)]')
+      .withGraphFetched('[genres, comments(orderByDate)]')
       .findById(id)
       .throwIfNotFound();
   }
