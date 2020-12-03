@@ -31,7 +31,7 @@ export class MovieModel extends Model {
 
   static findMovieById(id) {
     return this.query()
-      .withGraphFetched('[genres, comments(orderByDate)]')
+      .withGraphJoined('[genres, comments(orderByDate)]')
       .findById(id)
       .throwIfNotFound();
   }
