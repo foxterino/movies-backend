@@ -24,9 +24,7 @@ export class MovieModel extends Model {
   }
 
   static findByTitle(title) {
-    return this.query().where(qb =>
-      title ? qb.where('title', 'ilike', `%${title}%`) : []
-    );
+    return this.query().where('title', 'ilike', `%${title}%`);
   }
 
   static findMovieById(id) {
