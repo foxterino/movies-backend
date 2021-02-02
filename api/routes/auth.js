@@ -1,4 +1,6 @@
 import Router from 'koa-router';
+import { userScheme } from '../../validation';
+import { validate } from '../../middlewares/validate';
 import { AuthService } from '../../service/AuthService';
 
 export const TOKEN_KEY = 'token';
@@ -6,7 +8,7 @@ export const TOKEN_KEY = 'token';
 const route = new Router({ prefix: '/auth' });
 
 export const authRouter = app => {
-  route.post('/signup', async ctx => {
+  route.post('/signup', validate(userScheme), async ctx => {
     try {
       const { token } = await AuthService.signUp(ctx.request.body);
 

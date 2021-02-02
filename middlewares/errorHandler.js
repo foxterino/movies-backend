@@ -2,10 +2,10 @@ export const errorHandler = () => async (ctx, next) => {
   try {
     await next();
   } catch (error) {
-    const status = error.status || 500;
+    const { status = 500, message, errors } = error;
 
     ctx.status = status;
-    ctx.body = { code: status, message: error.message };
+    ctx.body = { code: status, message, errors };
 
     ctx.app.emit('error', error, ctx);
   }

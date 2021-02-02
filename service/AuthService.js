@@ -1,7 +1,7 @@
 import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import config from '../config';
-import { UserModel, PASSWORD_MIN_LENGTH } from '../models/UserModel';
+import { UserModel } from '../models/UserModel';
 
 const generateToken = ({ id }) => {
   const data = { id };
@@ -12,9 +12,7 @@ const generateToken = ({ id }) => {
 
 export class AuthService {
   static async signUp(userData) {
-    const { password } = userData;
-    const hashedPassword =
-      password.length >= PASSWORD_MIN_LENGTH ? md5(password) : '';
+    const hashedPassword = md5(userData.password);
 
     const userRecord = await UserModel.createUser({
       ...userData,
