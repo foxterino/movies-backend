@@ -12,7 +12,7 @@ export class MovieModel extends Model {
   }
 
   static createMovie(movieData) {
-    return this.query().insert(movieData);
+    return this.query().insert(movieData).returning('*');
   }
 
   static getAllMovies({ column, direction, ...selectors }) {

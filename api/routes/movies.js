@@ -1,6 +1,8 @@
 import Router from 'koa-router';
+import { movieSchema } from '../../validation';
 import { isAuth } from '../../middlewares/isAuth';
 import { MovieModel } from '../../models/MovieModel';
+import { validate } from '../../middlewares/validate';
 
 const route = new Router({ prefix: '/movies' });
 
@@ -14,6 +16,13 @@ export const moviesRouter = app => {
     } catch (error) {
       ctx.throw(400, 'Failed to fetch movies');
     }
+  });
+
+  route.post('/', validate(movieSchema), async ctx => {
+    const movie = await MovieModel.createMovie(ctx.request.body);
+
+    ctx.status = 200;
+    ctx.body = movie;
   });
 
   route.get('/search', async ctx => {
